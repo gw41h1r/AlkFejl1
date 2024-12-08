@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Versenyek Listája</title>
+</head>
+<body>
+    <h1>Versenyek Listája</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Név</th>
+                <th>Táv</th>
+                <th>Műveletek</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="race : ${races}">
+                <td th:text="${race.id}"></td>
+                <td th:text="${race.name}"></td>
+                <td th:text="${race.distance} + ' km'"></td>
+                <td>
+                    <a th:href="@{'/race/' + ${race.id}}">Részletek</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/races/add">Új verseny létrehozása</a>
+</body>
+</html>

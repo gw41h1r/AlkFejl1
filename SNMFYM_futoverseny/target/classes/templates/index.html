@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Futóverseny Kezdőlap</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Üdvözöllek a Futóverseny Alkalmazásban!</h1>
+        <p>Használd az alábbi funkciókat a futóversenyek kezeléséhez.</p>
+    </header>
+
+    <main>
+        <ul>
+            <li>
+                <a th:href="@{/races}">Versenyek listázása</a>
+                <p>Megtekintheted az összes futóversenyt. (GET)</p>
+            </li>
+            <li>
+                <a th:href="@{/races/add}">Új verseny létrehozása</a>
+                <p>Űrlap új verseny hozzáadásához. (GET -> POST)</p>
+            </li>
+            <li>
+                <a th:href="@{/api/runners/getRunners}">Összes futó listázása</a>
+                <p>Megtekintheted az összes regisztrált futót JSON formátumban. (GET)</p>
+            </li>
+            <li>
+                <a th:href="@{/h2-console}" target="_blank">Adatbázis konzol</a>
+                <p>Megnyitja az H2 adatbázis konzolt új ablakban. (GET)</p>
+            </li>
+        </ul>
+
+        <h2>További elérhető funkciók (API-k):</h2>
+        <ul>
+            <li>
+                <strong>Új futó hozzáadása:</strong>  
+                <code>POST /api/runners/addRunner</code>
+                <p>Új futó rögzítése az adatbázisban JSON formátumban küldött adatokkal.</p>
+                <strong>cURL példa:</strong><br>
+                <code>
+                    curl -X POST http://localhost:8080/api/runners/addRunner -H "Content-Type: application/json" -d '{"name": "Péter", "age": 30, "gender": "férfi"}'
+                </code>
+            </li>
+            <li>
+                <strong>Verseny frissítése:</strong>  
+                <code>POST /updateRace</code>
+                <p>Verseny adatainak (név, távolság) frissítése azonosító alapján. (JSON payload)</p>
+                <strong>cURL példa:</strong><br>
+                <code>
+                    curl -X POST http://localhost:8080/updateRace -H "Content-Type: application/json" -d '{"id": 1, "name": "Tavaszi Futás", "distance": 15}'
+                </code>
+            </li>
+            <li>
+                <strong>Új eredmény rögzítése:</strong>  
+                <code>POST /addResult</code>
+                <p>Eredmény hozzáadása egy futóhoz és versenyhez. (JSON payload)</p>
+                <strong>cURL példa:</strong><br>
+                <code>
+                    curl -X POST http://localhost:8080/addResult -H "Content-Type: application/json" -d '{"runnerId": 1, "raceId": 2, "time": 120}'
+                </code>
+            </li>
+            <li>
+                <strong>Verseny részletei futókkal:</strong>  
+                <code>GET /getRaceRunners/{id}</code>
+                <p>Egy adott verseny összes futójának és eredményének lekérdezése rendezett sorrendben.</p>
+                <strong>cURL példa:</strong><br>
+                <code>
+                    curl -X GET http://localhost:8080/getRaceRunners/1
+                </code>
+            </li>
+            <li>
+                <strong>Átlagos futási idő:</strong>  
+                <code>GET /getAverageTime/{id}</code>
+                <p>Kiszámolja egy adott verseny átlagos futási idejét.</p>
+                <strong>cURL példa:</strong><br>
+                <code>
+                    curl -X GET http://localhost:8080/getAverageTime/1
+                </code>
+            </li>
+        </ul>
+    </main>
+
+    <footer>
+        <p><strong>GDE</strong></p>
+        <p><em>Alkalmazásfejlesztés Technológia</em></p>
+        <p><strong>Puskovitz Attila</strong></p>
+        <p>SNMFYM</p>
+    </footer>
+</body>
+</html>
