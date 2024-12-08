@@ -1,0 +1,96 @@
+Példa API:
+Microsoft Windows [Version 10.0.19045.5131]
+(c) Microsoft Corporation. Minden jog fenntartva.
+
+C:\Users\Gwaihir>curl -X GET http://localhost:8080/api/runners/getRunners
+[{"id":1,"name":"János","age":25,"gender":"férfi","identifier":"U0001"},{"id":2,"name":"Anna","age":30,"gender":"nő","identifier":"U0002"},{"id":3,"name":"Péter","age":20,"gender":"férfi","identifier":"U0003"},{"id":4,"name":"Kata","age":22,"gender":"nő","identifier":"U0004"}]
+C:\Users\Gwaihir>curl -X GET http://localhost:8080/races
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Versenyek Listája</title>
+</head>
+<body>
+    <h1>Versenyek Listája</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Név</th>
+                <th>Táv</th>
+                <th>Műveletek</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Tavaszi Futás</td>
+                <td>10 km</td>
+                <td>
+                    <a href="/race/1">Részletek</a>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Nyári Maraton</td>
+                <td>42 km</td>
+                <td>
+                    <a href="/race/2">Részletek</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/races/add">Új verseny létrehozása</a>
+</body>
+</html>
+
+C:\Users\Gwaihir>curl -X POST http://localhost:8080/races/add -d "name=Sajtosfutam" -d "distance=10"
+
+C:\Users\Gwaihir>curl -X GET http://localhost:8080/races
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Versenyek Listája</title>
+</head>
+<body>
+    <h1>Versenyek Listája</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Név</th>
+                <th>Táv</th>
+                <th>Műveletek</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Tavaszi Futás</td>
+                <td>10 km</td>
+                <td>
+                    <a href="/race/1">Részletek</a>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Nyári Maraton</td>
+                <td>42 km</td>
+                <td>
+                    <a href="/race/2">Részletek</a>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Sajtosfutam</td>
+                <td>10 km</td>
+                <td>
+                    <a href="/race/3">Részletek</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/races/add">Új verseny létrehozása</a>
+</body>
+</html>
+
